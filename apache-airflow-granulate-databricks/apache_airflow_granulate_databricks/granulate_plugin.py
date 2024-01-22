@@ -40,6 +40,7 @@ class GranulateDatabricksSubmitRunOperator(DatabricksSubmitRunOperator):
             new_cluster = _add_granulate_env_vars_to_cluster(new_cluster)
         super().__init__(*args, new_cluster=new_cluster, **kwargs)
 
+
 class GranulateDatabricksSubmitRunDeferrableOperator(DatabricksSubmitRunDeferrableOperator):
     """
     Modified DatabricksSubmitRunDeferrableOperator to include Granulate-specific environment variables.
