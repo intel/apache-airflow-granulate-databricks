@@ -29,20 +29,20 @@ jobs:
 
     - name: Install apache-airflow-granulate-databricks-auto-patch
       working-directory: ./apache-airflow-granulate-databricks-auto-patch
-      run: poetry install
+      run: poetry install --with dev
 
     - name: Install apache-airflow-granulate-databricks
       working-directory: ./apache-airflow-granulate-databricks
       run: poetry install --with dev
 
-    - name: Lint with ruff
-      run: |
-        poetry run ruff .
+    - name: Lint with ruff in apache-airflow-granulate-databricks
+      working-directory: ./apache-airflow-granulate-databricks
+      run: poetry run ruff .
 
-    - name: Format with ruff
-      run: |
-        poetry run ruff format .
+    - name: Format with ruff in apache-airflow-granulate-databricks
+      working-directory: ./apache-airflow-granulate-databricks
+      run: poetry run ruff format .
 
-    - name: Mypy check
-      run: |
-        poetry run mypy .
+    - name: Mypy check in apache-airflow-granulate-databricks
+      working-directory: ./apache-airflow-granulate-databricks
+      run: poetry run mypy .
