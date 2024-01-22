@@ -21,13 +21,16 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install linters
-      run: |
-        pip install poetry
+    - name: Install Poetry
+      uses: snok/install-poetry@v1.3.3
+      with:
+        version: 1.7.1
+        virtualenvs-create: false
 
-    - name: Install package
-      run: |
-        pip install apache_airflow_granulate_databricks
+    - name: Install dependencies with poetry
+      run: poetry install --with dev
+      with:
+        path: apache-airflow-granulate-databricks/
 
     - name: Lint with ruff
       run: |
