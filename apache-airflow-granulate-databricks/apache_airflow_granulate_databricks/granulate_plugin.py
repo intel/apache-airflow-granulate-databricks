@@ -47,7 +47,7 @@ class GranulateDatabricksSubmitRunDeferrableOperator(DatabricksSubmitRunDeferrab
     Modified DatabricksSubmitRunDeferrableOperator to include Granulate-specific environment variables.
     """
 
-    def __init__(self, *args, new_cluster: Optional[Dict[str, Any]] = None, **kwargs):
+    def __init__(self, *args: Any, new_cluster: Optional[Dict[str, Any]] = None, **kwargs: Any):
         if new_cluster is not None:
             new_cluster = _add_granulate_env_vars_to_cluster(new_cluster)
         super().__init__(*args, new_cluster=new_cluster, **kwargs)
@@ -97,7 +97,7 @@ def patch() -> None:
             return original_execute(self, context)
 
         def patch_execute_method(operator_class: Type[BaseOperator], original_execute: Callable[..., Any]) -> None:
-            def patched_execute(self, context: Context) -> Any:
+            def patched_execute(self: Any, context: Context) -> Any:
                 return granulate_execute(self, context, original_execute)
 
             expected_execute_signature = inspect.signature(patched_execute)
