@@ -13,7 +13,7 @@ apache-airflow-granulate-databricks-auto-patch = {version = "0.1.0", optional = 
 
 
 [tool.poetry.group.dev.dependencies]
-apache-airflow==2.8.1
+apache-airflow= "2.8.1"
 mypy = "^1.1.1"
 pydantic = "^1"
 ruff = "^0.1.6"
