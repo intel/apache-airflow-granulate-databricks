@@ -104,7 +104,7 @@ def patch() -> None:
             _validate_method(DatabricksSubmitRunOperator, "execute", expected_execute_signature)
             _validate_method(DatabricksSubmitRunDeferrableOperator, "execute", expected_execute_signature)
 
-            operator_class.execute = patched_execute
+            operator_class.execute = patched_execute  # type: ignore
 
         patch_execute_method(DatabricksSubmitRunOperator, DatabricksSubmitRunOperator.execute)
         logger.debug("Patched DatabricksSubmitRunOperator.execute")
@@ -125,7 +125,7 @@ class GranulatePlugin(AirflowPlugin):
 
     name = "granulate"
 
-    def on_load(*args: Any, **kwargs: Any) -> Any:
+    def on_load(*args: Any, **kwargs: Any) -> Any:  # type: ignore
         """
         Loads the Granulate plugin. Patches DAG if the auto-patch feature is enabled.
         """
