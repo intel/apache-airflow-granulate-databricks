@@ -27,8 +27,8 @@ jobs:
         version: 1.7.1
         virtualenvs-create: false
 
-    - name: Install apache-airflow-granulate-databricks-auto-path
-      working-directory: ../apache-airflow-granulate-databricks-auto-path
+    - name: Install apache-airflow-granulate-databricks-auto-patch
+      working-directory: ./apache-airflow-granulate-databricks-auto-patch
       run: poetry install --with dev
 
     - name: Install apache-airflow-granulate-databricks
