@@ -16,7 +16,6 @@ apache-airflow-granulate-databricks-auto-patch = {version = "0.1.0", optional = 
 apache-airflow= "2.8.1"
 apache-airflow-providers-databricks = "6.0.0"
 mypy = "^1.1.1"
-pydantic = "^2"
 ruff = "^0.1.6"
 
 [build-system]
@@ -33,7 +32,6 @@ granulate_plugin = "apache_airflow_granulate_databricks.granulate_plugin:Granula
 [tool.mypy]
 strict = true
 files = "apache_airflow_granulate_databricks"
-plugins = ["pydantic.mypy"]
 
 [[tool.mypy.overrides]]
 module = "airflow.*"
