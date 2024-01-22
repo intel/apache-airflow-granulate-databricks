@@ -6,6 +6,7 @@ import logging
 from typing import TYPE_CHECKING, Any, Callable, Dict, Optional, Type
 
 from airflow.plugins_manager import AirflowPlugin
+from airflow.models import BaseOperator
 from airflow.providers.databricks.operators.databricks import (
     DatabricksSubmitRunDeferrableOperator,
     DatabricksSubmitRunOperator,
@@ -20,7 +21,7 @@ GRANULATE_JOB_NAME_KEY: str = "GRANULATE_JOB_NAME"
 GRANULATE_JOB_NAME_VALUE: str = "{{ task.task_id }}_{{ task.dag_id }}"
 
 
-def _add_granulate_env_vars_to_cluster(new_cluster: Dict[str, Any] = None) -> Dict[str, Any]:
+def _add_granulate_env_vars_to_cluster(new_cluster: Dict[str, Any]) -> Dict[str, Any]:
     """
     Adds Granulate environment variables to the new_cluster dictionary.
     If new_cluster is None, initializes it with the required structure.
@@ -35,7 +36,7 @@ class GranulateDatabricksSubmitRunOperator(DatabricksSubmitRunOperator):
     Modified DatabricksSubmitRunOperator to include Granulate-specific environment variables.
     """
 
-    def __init__(self, *args, new_cluster: Optional[Dict[str, Any]] = None, **kwargs):
+    def __init__(self, *args: Any, new_cluster: Optional[Dict[str, Any]] = None, **kwargs: Any):
         if new_cluster is not None:
             new_cluster = _add_granulate_env_vars_to_cluster(new_cluster)
         super().__init__(*args, new_cluster=new_cluster, **kwargs)
@@ -52,7 +53,7 @@ class GranulateDatabricksSubmitRunDeferrableOperator(DatabricksSubmitRunDeferrab
         super().__init__(*args, new_cluster=new_cluster, **kwargs)
 
 
-def _validate_method(operator: Type, method_name: str, expected_signature: inspect.Signature):
+def _validate_method(operator: Type[BaseOperator], method_name: str, expected_signature: inspect.Signature) -> None:
     if not hasattr(operator, method_name):
         raise RuntimeError(
             f"The operator {operator.__name__} does not have the method {method_name}. "
@@ -71,7 +72,7 @@ def _validate_method(operator: Type, method_name: str, expected_signature: inspe
         )
 
 
-def patch():
+def patch() -> None:
     """
     Patches the DAG to include Granulate job name for Databricks operators.
     """
@@ -81,7 +82,7 @@ def patch():
             DatabricksSubmitRunOperator,
         )
 
-        def granulate_execute(self, context: Context, original_execute: Callable[..., Any]) -> Any:
+        def granulate_execute(self: Any, context: Context, original_execute: Callable[..., Any]) -> Any:
             try:
                 if "new_cluster" in self.json:
                     self.json["new_cluster"].setdefault("spark_env_vars", {})[
@@ -95,7 +96,7 @@ def patch():
                 logger.exception("Got an exception in granulate_execute")
             return original_execute(self, context)
 
-        def patch_execute_method(operator_class: Type, original_execute: Callable[..., Any]) -> None:
+        def patch_execute_method(operator_class: Type[BaseOperator], original_execute: Callable[..., Any]) -> None:
             def patched_execute(self, context: Context) -> Any:
                 return granulate_execute(self, context, original_execute)
 
@@ -124,7 +125,7 @@ class GranulatePlugin(AirflowPlugin):
 
     name = "granulate"
 
-    def on_load(*args: Any, **kwargs: Any) -> None:
+    def on_load(*args: Any, **kwargs: Any) -> Any:
         """
         Loads the Granulate plugin. Patches DAG if the auto-patch feature is enabled.
         """
