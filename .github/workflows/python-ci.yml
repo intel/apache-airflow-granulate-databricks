@@ -27,7 +27,7 @@ jobs:
 
     - name: Install package
       run: |
-        pip apache_airflow_granulate_databricks
+        pip install apache_airflow_granulate_databricks
 
     - name: Lint with ruff
       run: |
