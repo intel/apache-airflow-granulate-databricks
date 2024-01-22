@@ -28,9 +28,8 @@ jobs:
         virtualenvs-create: false
 
     - name: Install dependencies with poetry
+      working-directory: ./apache-airflow-granulate-databricks
       run: poetry install --with dev
-      with:
-        path: apache-airflow-granulate-databricks/
 
     - name: Lint with ruff
       run: |
