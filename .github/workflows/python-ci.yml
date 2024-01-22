@@ -29,7 +29,7 @@ jobs:
 
     - name: Install apache-airflow-granulate-databricks-auto-patch
       working-directory: ./apache-airflow-granulate-databricks-auto-patch
-      run: poetry install --with dev
+      run: poetry install
 
     - name: Install apache-airflow-granulate-databricks
       working-directory: ./apache-airflow-granulate-databricks
