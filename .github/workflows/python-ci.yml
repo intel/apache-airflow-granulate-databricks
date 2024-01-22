@@ -23,7 +23,11 @@ jobs:
 
     - name: Install linters
       run: |
-        pip install poetry && cd apache_airflow_granulate_databricks && poetry run pip apache_airflow_granulate_databricks
+        pip install poetry
+
+    - name: Install package
+      run: |
+        pip apache_airflow_granulate_databricks
 
     - name: Lint with ruff
       run: |
