@@ -12,7 +12,7 @@ MIN_DBX_PROVIDER_SUPPORTED_VERSION = "4.2.0"
 MAX_DBX_PROVIDER_SUPPORTED_VERSION = "6.0.0"
 
 try:
-    from airflow.providers.databricks import __version__ as airflow_dbx_version  # type: ignore
+    from airflow.providers.databricks import __version__ as airflow_dbx_version
 except ImportError:
     raise RuntimeError(
         "The package `apache-airflow-granulate-databricks` couldn't verify "

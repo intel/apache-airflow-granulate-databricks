@@ -50,7 +50,7 @@ class GranulateDatabricksSubmitRunDeferrableOperator(DatabricksSubmitRunDeferrab
     def __init__(self, *args: Any, new_cluster: Optional[Dict[str, Any]] = None, **kwargs: Any):
         if new_cluster is not None:
             new_cluster = _add_granulate_env_vars_to_cluster(new_cluster)
-        super().__init__(*args, new_cluster=new_cluster, **kwargs)
+        super().__init__(*args, new_cluster=new_cluster, **kwargs)  # type: ignore
 
 
 def _validate_method(operator: Type[BaseOperator], method_name: str, expected_signature: inspect.Signature) -> None:
