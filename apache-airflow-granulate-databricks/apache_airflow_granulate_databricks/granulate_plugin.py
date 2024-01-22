@@ -5,8 +5,8 @@ import inspect
 import logging
 from typing import TYPE_CHECKING, Any, Callable, Dict, Optional, Type
 
-from airflow.plugins_manager import AirflowPlugin
 from airflow.models import BaseOperator
+from airflow.plugins_manager import AirflowPlugin
 from airflow.providers.databricks.operators.databricks import (
     DatabricksSubmitRunDeferrableOperator,
     DatabricksSubmitRunOperator,
