@@ -3,7 +3,6 @@ from __future__ import annotations
 import importlib.util
 import inspect
 import logging
-from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Callable, Dict, Optional, Type
 
 from airflow.plugins_manager import AirflowPlugin

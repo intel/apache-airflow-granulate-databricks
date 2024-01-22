@@ -23,7 +23,7 @@ jobs:
 
     - name: Install linters
       run: |
-        pip install ruff==0.1.6 mypy==1.1.1
+        pip install poetry && cd apache_airflow_granulate_databricks && poetry install --with dev
 
     - name: Lint with ruff
       run: |
