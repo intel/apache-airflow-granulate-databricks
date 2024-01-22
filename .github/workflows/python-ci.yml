@@ -21,6 +21,10 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Install linters
+      run: |
+        pip install ruff==0.1.6 mypy==1.1.1
+
     - name: Lint with ruff
       run: |
         poetry run ruff .
