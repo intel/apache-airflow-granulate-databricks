@@ -35,6 +35,10 @@ strict = true
 files = "apache_airflow_granulate_databricks"
 plugins = ["pydantic.mypy"]
 
+[[tool.mypy.overrides]]
+module = "airflow.*"
+ignore_missing_imports = true
+
 [tool.ruff]
 select = ["E", "F", "I"]
 ignore = ["E402"]

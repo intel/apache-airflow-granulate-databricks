@@ -15,7 +15,7 @@ try:
     from airflow.providers.databricks import __version__ as airflow_dbx_version  # type: ignore
 except ImportError:
     raise RuntimeError(
-        "The package `apache-airflow-granulate-databricks` couldn't verify"
+        "The package `apache-airflow-granulate-databricks` couldn't verify "
         "the version of apache-airflow-providers-databricks"
     )
 
@@ -23,14 +23,14 @@ if packaging.version.parse(packaging.version.parse(airflow_dbx_version).base_ver
     MIN_DBX_PROVIDER_SUPPORTED_VERSION
 ):
     raise RuntimeError(
-        f"The package `apache-airflow-granulate-databricks:{__version__}` requires"
-        "apache-airflow-providers-databricks version {MIN_DBX_PROVIDER_SUPPORTED_VERSION} or higher."
+        f"The package `apache-airflow-granulate-databricks:{__version__}` requires "
+        f"apache-airflow-providers-databricks version {MIN_DBX_PROVIDER_SUPPORTED_VERSION} or higher."
     )
 
 if packaging.version.parse(packaging.version.parse(airflow_dbx_version).base_version) > packaging.version.parse(
     MAX_DBX_PROVIDER_SUPPORTED_VERSION
 ):
     raise RuntimeError(
-        f"The package `apache-airflow-granulate-databricks:{__version__}` is not compatible"
-        "with apache-airflow-providers-databricks versions higher than {MAX_DBX_PROVIDER_SUPPORTED_VERSION}."
+        f"The package `apache-airflow-granulate-databricks:{__version__}` is not compatible "
+        f"with apache-airflow-providers-databricks versions higher than {MAX_DBX_PROVIDER_SUPPORTED_VERSION}."
     )
