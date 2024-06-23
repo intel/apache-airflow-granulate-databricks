@@ -37,7 +37,6 @@ def _add_granulate_env_vars_to_cluster(
 
     new_cluster["spark_env_vars"]["GRANULATE_AIRFLOW_VERSION"] = str(airflow_version)
     new_cluster["spark_env_vars"]["GRANULATE_AIRFLOW_DATABRICKS_PLUGIN_VERSION"] = str(airflow_dbx_version)
-    logger.info(f"Added Granulate environment variables to the cluster: {new_cluster}")
     return new_cluster
 
 

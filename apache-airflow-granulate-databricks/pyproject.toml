@@ -7,7 +7,7 @@ readme = "README.md"
 license = "LICENSE"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.8,<3.13"
 # docutils 0.21 cannot be installed with poetry
 # See https://github.com/python-poetry/poetry/issues/9293
 docutils = "!=0.21"
