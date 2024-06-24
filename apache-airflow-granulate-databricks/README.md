@@ -41,7 +41,7 @@ To install the apache-airflow-granulate-databricks package, choose the method th
 
 ## Requirements
 - Tested on Databricks Airflow Provider (4.2.0 <= version <= 6.5.0)
-- Python version 3.7 or higher
+- Python version 3.8 or higher
 
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
