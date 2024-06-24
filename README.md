@@ -10,8 +10,8 @@ The `apache-airflow-granulate-databricks` package is an open-source plugin for A
 
 **Key Features:**
 - Manual and automatic patching of Databricks operators.
-- Compatibility with Databricks Airflow Provider versions 4.2.0 to 6.0.0.
-- Supports Python version 3.7 or higher.
+- Compatibility with Databricks Airflow Provider versions 4.2.0 to 6.5.0.
+- Supports Python version 3.8 or higher.
 
 For detailed information, installation instructions, and usage guidelines, see the [README](./apache-airflow-granulate-databricks/README.md) in its directory.
 
