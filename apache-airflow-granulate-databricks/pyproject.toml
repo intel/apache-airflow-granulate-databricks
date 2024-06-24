@@ -7,14 +7,17 @@ readme = "README.md"
 license = "LICENSE"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<3.12"
+python = ">=3.8,<3.13"
+# docutils 0.21 cannot be installed with poetry
+# See https://github.com/python-poetry/poetry/issues/9293
+docutils = "!=0.21"
 importlib-metadata = "*"
 apache-airflow-granulate-databricks-auto-patch = {version = "0.1.0", optional = true}
 
 
 [tool.poetry.group.dev.dependencies]
-apache-airflow= "2.8.1"
-apache-airflow-providers-databricks = "6.0.0"
+apache-airflow= "2.9.2"
+apache-airflow-providers-databricks = "6.5.0"
 mypy = "^1.1.1"
 ruff = "^0.1.6"
 

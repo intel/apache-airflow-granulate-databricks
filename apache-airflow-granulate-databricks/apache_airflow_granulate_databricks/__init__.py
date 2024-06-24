@@ -9,7 +9,8 @@ __all__ = ["__version__"]
 __version__ = version("apache_airflow_granulate_databricks")
 
 MIN_DBX_PROVIDER_SUPPORTED_VERSION = "4.2.0"
-MAX_DBX_PROVIDER_SUPPORTED_VERSION = "6.0.0"
+MAX_DBX_PROVIDER_SUPPORTED_VERSION = "6.5.0"
+
 
 try:
     from airflow.providers.databricks import __version__ as airflow_dbx_version

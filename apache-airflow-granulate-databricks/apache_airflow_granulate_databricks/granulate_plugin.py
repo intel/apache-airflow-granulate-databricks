@@ -5,8 +5,10 @@ import inspect
 import logging
 from typing import TYPE_CHECKING, Any, Callable, Dict, Optional, Type
 
+from airflow import __version__ as airflow_version
 from airflow.models import BaseOperator
 from airflow.plugins_manager import AirflowPlugin
+from airflow.providers.databricks import __version__ as airflow_dbx_version
 from airflow.providers.databricks.operators.databricks import (
     DatabricksSubmitRunDeferrableOperator,
     DatabricksSubmitRunOperator,
@@ -21,13 +23,20 @@ GRANULATE_JOB_NAME_KEY: str = "GRANULATE_JOB_NAME"
 GRANULATE_JOB_NAME_VALUE: str = "{{ task.task_id }}_{{ task.dag_id }}"
 
 
-def _add_granulate_env_vars_to_cluster(new_cluster: Dict[str, Any]) -> Dict[str, Any]:
+def _add_granulate_env_vars_to_cluster(
+    new_cluster: Dict[str, Any], granulate_job_name_value: Optional[str] = None
+) -> Dict[str, Any]:
     """
     Adds Granulate environment variables to the new_cluster dictionary.
     If new_cluster is None, initializes it with the required structure.
     """
+    if granulate_job_name_value is not None:
+        new_cluster.setdefault("spark_env_vars", {})[GRANULATE_JOB_NAME_KEY] = granulate_job_name_value
+    else:
+        new_cluster.setdefault("spark_env_vars", {})[GRANULATE_JOB_NAME_KEY] = GRANULATE_JOB_NAME_VALUE
 
-    new_cluster.setdefault("spark_env_vars", {})[GRANULATE_JOB_NAME_KEY] = GRANULATE_JOB_NAME_VALUE
+    new_cluster["spark_env_vars"]["GRANULATE_AIRFLOW_VERSION"] = str(airflow_version)
+    new_cluster["spark_env_vars"]["GRANULATE_AIRFLOW_DATABRICKS_PLUGIN_VERSION"] = str(airflow_dbx_version)
     return new_cluster
 
 
@@ -85,9 +94,9 @@ def patch() -> None:
         def granulate_execute(self: Any, context: Context, original_execute: Callable[..., Any]) -> Any:
             try:
                 if "new_cluster" in self.json:
-                    self.json["new_cluster"].setdefault("spark_env_vars", {})[
-                        GRANULATE_JOB_NAME_KEY
-                    ] = f"{self.task_id}_{self.dag.dag_id}"
+                    _add_granulate_env_vars_to_cluster(
+                        self.json["new_cluster"], granulate_job_name_value=f"{self.task_id}_{self.dag.dag_id}"
+                    )
                 else:
                     self.log.info("Operator's json doesn't contain `new_cluster`, skip patching")
 
