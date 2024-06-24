@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "apache-airflow-granulate-databricks"
-version = "0.1.0"
+version = "0.2.1"
 authors = ["Granulate <databricks.publisher@granulate.io>"]
 description = "The Granulate Airflow-Databricks Integration is an open-source plugin for Apache Airflow. It's specifically designed to set environment variables that allow Granulate's performance monitoring agent to identify and integrate with Databricks jobs orchestrated by Airflow. This plugin tags Databricks jobs, aiding the Granulate optimizing agent."
 readme = "README.md"
